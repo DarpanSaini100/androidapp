@@ -1,37 +1,69 @@
-import { Tabs } from 'expo-router';
 import React from 'react';
+import { View, Image } from 'react-native';
+import { Tabs } from 'expo-router';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+// Assuming you have an icons object with your icons
+import { icons } from '../../constants/icons';
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
-  );
+// Define the props for TabIcon
+interface TabIconProps {
+    icon: any; // Replace 'any' with the specific type of your icon if available
 }
+
+// Create the TabIcon component with props
+const TabIcon: React.FC<TabIconProps> = ({ icon }) => (
+    <View>
+        <Image source={icon} style={{ width: 24, height: 24 }} />
+    </View>
+);
+
+const TabsLayout: React.FC = () => {
+    return (
+        <>
+            <Tabs>
+                <Tabs.Screen
+                    name="home"
+                    options={{
+                        headerShown: false,
+                        title: "Home",
+                        tabBarIcon: ({ color, focused }) => (
+                            <TabIcon icon={icons.Home} />
+                        ),
+                    }}
+                />
+                <Tabs.Screen
+                    name="create"
+                    options={{
+                        headerShown: false,
+                        title: "Create",
+                        tabBarIcon: ({ color, focused }) => (
+                            <TabIcon icon={icons.Create} />
+                        ),
+                    }}
+                />
+                <Tabs.Screen
+                    name="profile"
+                    options={{
+                        headerShown: false,
+                        title: "Profile",
+                        tabBarIcon: ({ color, focused }) => (
+                            <TabIcon icon={icons.Profile} />
+                        ),
+                    }}
+                />
+                <Tabs.Screen
+                    name="bookmark"
+                    options={{
+                        headerShown: false,
+                        title: "Bookmark",
+                        tabBarIcon: ({ color, focused }) => (
+                            <TabIcon icon={icons.Bookmark} />
+                        ),
+                    }}
+                />
+            </Tabs>
+        </>
+    );
+};
+
+export default TabsLayout;
