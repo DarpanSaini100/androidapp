@@ -7,7 +7,7 @@ const CustomButton = ({handlePress}) => {
   return (
     <TouchableOpacity onPress={handlePress} 
       activeOpacity={0.7}>
-      <Text >Continue with Email</Text>
+      <Text className="text-white">Continue with Email</Text>
     </TouchableOpacity>
   )
 }
